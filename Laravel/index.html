@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Laravel Package Development</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/laravel.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/atom-one-dark.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">    
+       <section class="slide-intro" data-markdown="slides/intro.md"></section>
+        <section data-markdown="slides/inhalt.md"></section>
+        <section data-markdown="slides/laravel-allgemein.md"></section>
+        <section data-markdown="slides/laravel-allgemein1.md"></section>
+        <section data-markdown="slides/ordnerstruktur.md"></section>
+        <section class="slide-intro" data-markdown="slides/mvc.md"></section>
+        <section data-markdown="slides/model.md"></section>
+    <section data-markdown="slides/model2.md"></section>
+    <section data-markdown="slides/model3.md"></section>
+        <section data-markdown="slides/mvc-controller.md"></section>
+		    <section data-markdown="slides/routingTabelle.md"></section>
+		    <section data-markdown="slides/controller-show-action.md"></section>		
+        <section data-markdown="slides/view.md"></section>
+        <section data-markdown="slides/view-example.md"></section>
+        <section data-markdown="slides/view-example2.md"></section>
+        <section data-markdown="slides/view-example3.md"></section>
+        <section data-markdown="slides/view-example4.md"></section> 
+         <section data-markdown="slides/json.md"></section>
+    <section data-markdown="slides/rest.md"></section>
+    <section data-markdown="slides/rest2.md"></section>
+        <section data-markdown="slides/angular-example.md"></section>
+        <section data-markdown="slides/angular-example2.md"></section>
+		    <section data-markdown="slides/verwendung-in-java.md"></section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        history: true,
+        height: 750,
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          // { src: 'plugin/prism/prism.js', async: true, callback: function() {  } }
+        ]
+      });
+    </script>
+  </body>
+</html>
