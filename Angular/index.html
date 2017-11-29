@@ -1,0 +1,413 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Angular</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<style>
+			.reveal section img {
+				border: 0;
+				box-shadow: 0 0 0px rgba(0, 0, 0, 0.15);
+			}
+		</style>
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+                <!-- Titelseite -->
+				<section>
+					<img src="images/angular.svg" height="250">
+					<h1>Angular</h1>
+				</section>
+
+				<!-- Inhaltsverzeichnis -->
+				<section>
+					<h2>Inhaltsverzeichnis</h2>
+					<p class="fragment fade-down"><a href="#/what">Was ist Angular?</a></p>
+					<p class="fragment fade-down"><a href="#/how">Wie funktioniert Angular?</a></p>
+                    <p class="fragment fade-down"><a href="#/components">Components</a></p>
+                    <p class="fragment fade-down"><a href="#/databinding">Databinding</a></p>
+                    <p class="fragment fade-down"><a href="#/directives">Directives</a></p>
+                    <p class="fragment fade-down"><a href="#/live">Live Coding</a></p>
+                    <p class="fragment fade-down"><a href="#/sources">Quellen</a></p>
+				</section>
+
+                <!-- Inhalt -->
+				<section id="what">
+					<h2>Was ist Angular?</h2>
+					<p>
+						Angular ist ein auf TypeScript basierendes <strong>JavaScript Framework</strong>,
+						welches dir erlaubt <strong>Single-Page-Webanwendung</strong> zu erstellen.
+					</p>
+				</section>
+                <section id="how">
+                    <section>
+                        <h2>Wie funktioniert Angular?</h2>
+                        <h3>Konzept</h3>
+                        <img src="images/overview.png">
+                    </section>
+                    <section>
+                        <h2>Die erste Anwendung</h2>
+                        <img src="images/started.png">
+                    </section>
+                    <section>
+                        <h2>index.html</h2>
+                        <pre><code data-trim data-noescape>
+                            &lt;!doctype html&gt;
+                            &lt;html lang=&quot;en&quot;&gt;
+                                &lt;head&gt;
+                                    &lt;meta charset=&quot;utf-8&quot;&gt;
+                                    &lt;title&gt;Presentation&lt;/title&gt;
+                                    &lt;base href=&quot;/&quot;&gt;
+
+                                    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+                                    &lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;favicon.ico&quot;&gt;
+                                &lt;/head&gt;
+                                &lt;body&gt;
+                                    &lt;app-root&gt;&lt;/app-root&gt;
+
+                                    &lt;script type=&quot;text/javascript&quot; src=&quot;inline.bundle.js&quot;&gt;&lt;/script&gt;
+                                    &lt;script type=&quot;text/javascript&quot; src=&quot;polyfills.bundle.js&quot;&gt;&lt;/script&gt;
+                                    &lt;script type=&quot;text/javascript&quot; src=&quot;styles.bundle.js&quot;&gt;&lt;/script&gt;
+                                    &lt;script type=&quot;text/javascript&quot; src=&quot;vendor.bundle.js&quot;&gt;&lt;/script&gt;
+                                    &lt;script type=&quot;text/javascript&quot; src=&quot;main.bundle.js&quot;&gt;&lt;/script&gt;
+                                &lt;/body&gt;
+                            &lt;/html&gt;
+	                    </code></pre>
+                    </section>
+                    <section>
+                        <h2>main.ts</h2>
+                        <pre><code data-trim data-noescape>
+                            import { enableProdMode } from '@angular/core';
+                            import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
+                            import { AppModule } from './app/app.module';
+                            import { environment } from './environments/environment';
+
+                            if (environment.production) {
+                              enableProdMode();
+                            }
+
+                            platformBrowserDynamic().bootstrapModule(AppModule);
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>app.module.ts</h2>
+                        <pre><code data-trim data-noescape>
+                            import { BrowserModule } from '@angular/platform-browser';
+                            import { NgModule } from '@angular/core';
+
+                            import { AppComponent } from './app.component';
+
+                            @NgModule({
+                              declarations: [
+                                AppComponent
+                              ],
+                              imports: [
+                                BrowserModule
+                              ],
+                              providers: [],
+                              bootstrap: [AppComponent]
+                            })
+                            export class AppModule { }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>app.component.ts</h2>
+                        <pre><code data-trim data-noescape>
+                            import { Component } from '@angular/core';
+
+                            @Component({
+                              selector: 'app-root',
+                              templateUrl: './app.component.html',
+                              styleUrls: ['./app.component.css']
+                            })
+                            export class AppComponent {
+                              title = 'app';
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>app.component.html</h2>
+                        <pre><code data-trim data-noescape>
+                            &lt;!--The content below is only a placeholder and can be replaced.--&gt;
+                            &lt;div style=&quot;text-align:center&quot;&gt;
+                              &lt;h1&gt;
+                                Welcome to {{title}}!
+                              &lt;/h1&gt;
+                              &lt;img width=&quot;300&quot; src=&quot;data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=&quot;&gt;
+                            &lt;/div&gt;
+                        </code></pre>
+                    </section>
+                </section>
+                <section id="components">
+                    <section>
+                        <h2>Components</h2>
+                        <img src="images/component.png">
+                    </section>
+                    <section>
+                        <img src="images/steam.png">
+                    </section>
+                    <section>
+                        <h2>Dekorator (Meta-Daten)</h2>
+                        <pre><code data-trim data-noescape>
+                            @Component({
+                                selector: 'app-root',
+                                templateUrl: './app.component.html',
+                                styleUrls: ['./app.component.css']
+                            })
+                        </code></pre>
+                        <p class="fragment fade-down" data-fragment-index="2">Oder</p>
+                        <pre class="fragment fade-down" data-fragment-index="2"><code data-trim data-noescape>
+                            @Component({
+                                selector: '[app-root]',
+                                template: `
+                                    &lt;h1&gt;Presentation&lt;/h1&gt;
+                                    &lt;app-component&gt;&lt;/app-component&gt;`,
+                                styles: [`
+                                    h3 {
+                                        color: red;
+                                    }
+                                `]
+                            })
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>AppComponent Klasse</h2>
+                        <pre><code data-trim data-noescape>
+                            export class AppComponent {
+                                title = 'app';
+                            }
+                        </code></pre>
+                        <p class="fragment fade-down" data-fragment-index="2">Oder</p>
+                        <pre class="fragment fade-down" data-fragment-index="2"><code data-trim data-noescape>
+                            export class AppComponent implements OnInit {
+                                title: String;
+
+                                constructor(private someService: SomeService) {
+                                }
+
+                                ngOnInit() {
+                                    this.title = this.someService.getTitle();
+                                }
+                            }
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>AppComponent</h2>
+                        <pre class="fragment fade-down" data-fragment-index="3"><code data-trim data-noescape>
+                            import {Component, OnInit} from '@angular/core';
+                            import {SomeService} from './some.service';
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="2"><code data-trim data-noescape>
+                            @Component({
+                                selector: 'app-root',
+                                templateUrl: './app.component.html',
+                                styleUrls: ['./app.component.css']
+                            })
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="1"><code data-trim data-noescape>
+                            export class AppComponent implements OnInit {
+                                title: String;
+
+                                constructor(private someService: SomeService) {
+                                }
+
+                                ngOnInit() {
+                                    this.title = this.someService.getTitle();
+                                }
+                            }
+                        </code></pre>
+                    </section>
+                </section>
+                <section id="databinding">
+                    <section>
+                        <h2>Databinding</h2>
+                        <img src="images/databinding.png">
+                    </section>
+                    <section>
+                        <h2>String Interpolation</h2>
+                        <pre class="fragment fade-down" data-fragment-index="1"><code data-trim data-noescape>
+                            &lt;h1&gt;
+                                {{ 'Welcome' }} to App!
+                            &lt;/h1&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="2"><code data-trim data-noescape>
+                            &lt;h1&gt;
+                                {{ 12 }} to App!
+                            &lt;/h1&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="3"><code data-trim data-noescape>
+                            &lt;h1&gt;
+                                Welcome to {{ title }}!
+                            &lt;/h1&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="4"><code data-trim data-noescape>
+                            &lt;h1&gt;
+                                Welcome to {{ someService.getTitle() }}!
+                            &lt;/h1&gt;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Property Binding</h2>
+                        <pre class="fragment fade-down" data-fragment-index="1"><code data-trim data-noescape>
+                            &lt;input [placeholder]=&quot;title&quot; /&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="2"><code data-trim data-noescape>
+                            &lt;img [src]=&quot;imageUrl&quot;&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="3"><code data-trim data-noescape>
+                            &lt;button [disabled]=&quot;isUnchanged&quot;&gt;Cancel is disabled &lt;/button&gt;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Event Binding</h2>
+                        <pre class="fragment fade-down" data-fragment-index="1"><code data-trim data-noescape>
+                            &lt;button (click)=&quot;event()&quot;&gt;
+                                Hochz&auml;hlen
+                            &lt;/button&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="2"><code data-trim data-noescape>
+                            &lt;button (click)=&quot;buttonClicks = buttonClicks + 1&quot;&gt;
+                                Hochz&auml;hlen
+                            &lt;/button&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="3"><code data-trim data-noescape>
+                            &lt;input (input)=&quot;title = $event.target.value&quot; /&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="4"><code data-trim data-noescape>
+                            &lt;input (input)=&quot;title = function($event)&quot; /&gt;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>Two-Way-Databinding</h2>
+                        <pre class="fragment fade-down" data-fragment-index="1"><code data-trim data-noescape>
+                            &lt;input [(ngModel)]=&quot;title&quot; /&gt;
+                        </code></pre>
+                        <p class="fragment fade-down" data-fragment-index="2">ist äquivalent zu</p>
+                        <pre class="fragment fade-down" data-fragment-index="2"><code data-trim data-noescape>
+                            &lt;input [value]=&quot;title&quot; (input)=&quot;title&quot;/&gt;
+                        </code></pre>
+                        <p class="fragment fade-down" data-fragment-index="3" style="color: red">Wichtig!</p>
+                        <pre class="fragment fade-down" data-fragment-index="3"><code data-trim data-noescape>
+                            import { FormsModule } from '@angular/forms';
+                            ...
+                            @NgModule({
+                                ...
+                                imports: [
+                                    BrowserModule,
+                                    FormsModule
+                                ],
+                                ...
+                            })
+                        </code></pre>
+                    </section>
+                </section>
+                <section id="directives">
+                    <section>
+                        <h2>Directives</h2>
+                        <img src="images/directive.png">
+                    </section>
+                    <section>
+                        <h2>if</h2>
+                        <pre class="fragment fade-down" data-fragment-index="1"><code data-trim data-noescape>
+                            &lt;p *ngIf=&quot;true&quot;&gt;If&lt;/p&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="2"><code data-trim data-noescape>
+                            &lt;p *ngIf=&quot;title !== 'app'&quot;&gt;If&lt;/p&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="3"><code data-trim data-noescape>
+                            &lt;p *ngIf=&quot;isUpdated()&quot;&gt;If&lt;/p&gt;
+                        </code></pre>
+                        <h2 class="fragment fade-down" data-fragment-index="4">if-else</h2>
+                        <pre class="fragment fade-down" data-fragment-index="4"><code data-trim data-noescape>
+                            &lt;p *ngIf=&quot;!(title === 'app'); else ifelse&quot;&gt;If&lt;/p&gt;
+                            &lt;ng-template #ifelse&gt;
+                                &lt;p&gt;Else&lt;/p&gt;
+                            &lt;/ng-template&gt;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>for</h2>
+                        <pre class="fragment fade-down" data-fragment-index="1"><code data-trim data-noescape>
+                              &lt;p *ngFor=&quot;let number of numbers&quot;&gt;{{ number }}&lt;/p&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="2"><code data-trim data-noescape>
+                              &lt;p *ngFor=&quot;let number of numbers; let i = index&quot;&gt;&lt;/p&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="3"><code data-trim data-noescape>
+                              &lt;app-number
+                                      *ngFor=&quot;let nr of numbers; let i = index&quot;
+                                      [number]=&quot;nr&quot;
+                                      [index]=&quot;i&quot;&gt;&lt;/app-number&gt;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>ngClass</h2>
+                        <pre class="fragment fade-down" data-fragment-index="1"><code data-trim data-noescape>
+                            .something {
+                                background-color: blue;
+                                color: white;
+                            }
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="2"><code data-trim data-noescape>
+                            &lt;p [ngClass]=&quot;{ something: title !== 'app' }&quot;&gt;If&lt;/p&gt;
+                        </code></pre>
+                    </section>
+                    <section>
+                        <h2>ngStyle</h2>
+                        <pre class="fragment fade-down" data-fragment-index="1"><code data-trim data-noescape>
+                            &lt;p [ngStyle]=&quot;{backgroundColor: 'red'}&quot;&gt;Else&lt;/p&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="2"><code data-trim data-noescape>
+                            &lt;p [ngStyle]=&quot;{'background-color': 'red'}&quot;&gt;Else&lt;/p&gt;
+                        </code></pre>
+                        <pre class="fragment fade-down" data-fragment-index="3"><code data-trim data-noescape>
+                            &lt;p [ngStyle]=&quot;{backgroundColor: getColor()}&quot;&gt;Else&lt;/p&gt;
+                        </code></pre>
+                    </section>
+                </section>
+                <section id="live">
+                    <h1>Live Coding</h1>
+                </section>
+                <section id="sources">
+                    <h2>Quellen</h2>
+                    <a href="https://angular.io/">Angular</a>
+                </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
